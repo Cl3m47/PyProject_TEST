@@ -1,5 +1,24 @@
 from tkinter import *
 import tkinter.ttk as ttk
+import pyvisa
+
+rm = pyvisa.ResourceManager()
+
+def connexion():
+    # Statut connexion milliwattmètre
+    try:
+        pwr = rm.open_resource(Adr_PWR.get())
+        pwr.write("*CLS")
+        print(pwr.query("*IDN?"))
+        status_PWR.set('Connecté')
+        Label_Status_PWR.config(bg='green')
+        pwr.clear()
+        pwr.close()
+    except:
+        status_PWR.set('Non connecté')
+        Label_Status_PWR.config(bg='red')
+        print('erreur milliwattmètre')
+        pass
 
 # FENETRES
 window = Tk()
@@ -32,7 +51,7 @@ Adr_PWR = Entry(frame1, width=45)
 Adr_PWR.insert(0, 'TCPIP0::169.254.212.206::inst0::INSTR')
 
 # BOUTONS
-Btn_instr = Button(frame1, text="Connexion", width=10)
+Btn_instr = Button(frame1, text="Connexion", width=10, command=connexion)
 Btn_Mesure = Button(frame3, text='Mesurer', width=10, bg='#00A040')
 Btn_Q = Button(frame3, text='Quitter', width=10, command=quit)
 
