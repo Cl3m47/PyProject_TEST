@@ -20,6 +20,15 @@ def connexion():
         print('erreur milliwattmètre')
         pass
 
+def lecture():
+    try:
+        pwr = rm.open_resource(Adr_PWR.get())
+        pwr.write("MEAS1:SCAL:POW:AC?")
+        print(pwr.read())
+    except:
+        print('erreur commande')
+        pass
+
 # FENETRES
 window = Tk()
 
@@ -48,11 +57,11 @@ Label_Status_PWR = Label(frame1, textvariable=status_PWR, bg='red', fg='white')
 
 # ENTREES
 Adr_PWR = Entry(frame1, width=45)
-Adr_PWR.insert(0, 'TCPIP0::169.254.212.206::inst0::INSTR')
+Adr_PWR.insert(0, 'GPIB0::13::INSTR')
 
 # BOUTONS
 Btn_instr = Button(frame1, text="Connexion", width=10, command=connexion)
-Btn_Mesure = Button(frame3, text='Mesurer', width=10, bg='#00A040')
+Btn_Mesure = Button(frame3, text='Mesurer', width=10, bg='#00A040', command=lecture)
 Btn_Q = Button(frame3, text='Quitter', width=10, command=quit)
 
 # POSITIONNEMENT WIDGETS
