@@ -42,8 +42,8 @@ PwrMeas.set('0.00')
 status_PWR.set('Non connecté')
 status_SA.set('Non connecté')
 
-font1 = tkFont.Font(family='stencil', size=36)
-#font1 = tkFont.Font(family='OCR A Extended', size=36)
+#font1 = tkFont.Font(family='stencil', size=36)
+font1 = tkFont.Font(family='OCR A Extended', size=36)
 
 # PERSONNALISATION
 window.title("Milliwattmètre N1913A")
